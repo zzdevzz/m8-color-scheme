@@ -1,10 +1,10 @@
-// lets og
-
 let colorInput = document.getElementById("colorInput")
 const colorButton = document.getElementById("colorSubmit")
-const colorChoices = ["monochrome", "monochrome-dark" , "monochrome-light", "analogic complement", "analogic-complement", "triad","quad"]
+const colorChoices = ["monochrome", "monochrome-dark" , "monochrome-light", "analogic-complement", "triad","quad"]
 const colorScheme = document.getElementById("colorScheme")
+const colorNumberOf = document.getElementById("colorNumberOf")
 const colorForm = document.getElementById("colorForm")
+const colorMenu = document.getElementById("colorMenu")
 
 // Set colorScheme Options in HTML
 for (let color of colorChoices){
@@ -16,11 +16,12 @@ colorForm.addEventListener("submit", function(e){
     const colorFormData = new FormData(colorForm)
     const colorVal = colorFormData.get(`color`).replace('#', '')
     const colorSchemeVal = colorFormData.get(`colorScheme`)
-    console.log(colorVal)
-    console.log(colorSchemeVal)
-    getColors(colorVal, colorSchemeVal, 6)
-        .then(data=>colors = data)
-        .then(()=>console.log(colors))
+    const colorCount = ''
+    // console.log(colorVal)
+    // console.log(colorSchemeVal)
+    getColors(colorVal, colorSchemeVal,6)
+        .then(data => console.log(data))
+        .then(data => data.forEach(item => {console.log(item)}))
 })
 
 
@@ -33,7 +34,28 @@ function getColors(color, colorScheme, colorCount){
             if (!res.ok){
                 throw new Error(`HTTP error! Status: ${res.status}`)
             }
-            else return res.json()
+            else {
+                let fetchColors= [] 
+                res.json()
+                .then(data => data.colors)
+                .then(colors => colors.forEach((color) => {
+                    let finalColor = {}
+                    finalColor.name = color.name.value
+                    finalColor.hex = color.hex.value
+                    fetchColors.push(finalColor)
+                }))
+                return fetchColors
+            }
         })
         .catch(error => console.error("Fetch error:", error));
 }
+
+// function setColors(colorsList){
+//     colorsList.forEach((color) => {
+//         console.log(color)
+//         colorMenu.innerHTML += colorMenu.innerHTML + 
+//         `<div id="${color.hex}">
+//         <h2> ${color.name} </h2>
+//         </div>`
+//     })
+// }
