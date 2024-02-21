@@ -4,15 +4,22 @@
     </head>
     <body>
         <form id="colorForm">
-            <input type="color" id="colorInput" name="color"/>
+            <input type="color" id="colorInput" name="color" value="#FFD700" />
             <select name="colorScheme" id="colorScheme">
-            <select></select>
-            <input type="number" id="colorNumberOf" name="colorNumberOf">
+            <input type="number" id="colorNumberOf" name="colorNumberOf" value="5">
             <button id="colorSubmit" type="submit">Get Color Scheme</button>
-            <script src="index.js"></script>
         </form>
-        <section>
-            <p id="test">Playstation</p>
-        </section>
+            <!-- Custom Alert Box -->
+            <div class="custom-alert" id="customAlert">
+                <p id="alertMsg">Color HEX Copied!</p>
+            </div>
+        <main id="colorMenu" class="color-menu">
+        </main>
+        <script src="index.js"></script>
     </body>
 </html>
+
+<!-- Stretch goal click on color and it gives you hex code copied to your clipboard -->
+<!-- api https://www.thecolorapi.com/docs#schemes
+scrim link https://scrimba.com/learn/frontend/solo-project-color-scheme-generator-co73343ea8c93c5d396d7ac67
+figma file https://www.figma.com/file/twasy8Bca4hW7gunLFSLoY/Color-Scheme-Generator?type=design&node-id=2-1155&mode=design&t=nqfhf1lXEG5iyT5c-0 -->
